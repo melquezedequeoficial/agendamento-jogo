@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agendamento de Jogo - Fotografia</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #0077cc;
+  }
+  form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  input, select, textarea, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #0077cc;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button:hover {
+    background-color: #005fa3;
+  }
+</style>
+</head>
+<body>
+
+<h1>Agende Seu Ensaio Fotográfico de Jogo</h1>
+
+<form id="agendamentoForm">
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" name="nome" required>
+
+  <label for="time">Nome do Time:</label>
+  <input type="text" id="time" name="time" required>
+
+  <label for="telefone">Telefone / WhatsApp:</label>
+  <input type="tel" id="telefone" name="telefone" required placeholder="Ex: 86998078582">
+
+  <label for="modalidade">Modalidade:</label>
+  <select id="modalidade" name="modalidade" required>
+    <option value="">Selecione...</option>
+    <option value="Futebol">Futebol</option>
+    <option value="Vôlei">Vôlei</option>
+    <option value="Basquete">Basquete</option>
+    <option value="Futsal">Futsal</option>
+    <option value="Beach Soccer">Beach Soccer</option>
+    <option value="E-sports">E-sports</option>
+    <option value="Outro">Outro</option>
+  </select>
+
+  <label for="data">Data do Jogo:</label>
+  <input type="date" id="data" name="data" required>
+
+  <label for="hora">Horário:</label>
+  <input type="time" id="hora" name="hora" required>
+
+  <label for="local">Local:</label>
+  <input type="text" id="local" name="local" required>
+
+  <label for="observacoes">Observações:</label>
+  <textarea id="observacoes" name="observacoes" rows="4" placeholder="Algum detalhe extra?"></textarea>
+
+  <button type="submit">Agendar</button>
+</form>
+
+<script>
+  document.getElementById('agendamentoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nome = document.getElementById('nome').value.trim();
+    const time = document.getElementById('time').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const modalidade = document.getElementById('modalidade').value;
+    const data = document.getElementById('data').value;
+    const hora = document.getElementById('hora').value;
+    const local = document.getElementById('local').value.trim();
+    const observacoes = document.getElementById('observacoes').value.trim() || "Nenhuma";
+
+    if (!nome || !time || !telefone || !modalidade || !data || !hora || !local) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
+
+    const mensagem =
+      `📸 *Novo Agendamento de Ensaio Fotográfico*%0A%0A` +
+      `👤 *Nome:* ${encodeURIComponent(nome)}%0A` +
+      `🏆 *Time:* ${encodeURIComponent(time)}%0A` +
+      `📱 *Telefone:* ${encodeURIComponent(telefone)}%0A` +
+      `🎯 *Modalidade:* ${encodeURIComponent(modalidade)}%0A` +
+      `📅 *Data:* ${encodeURIComponent(data)}%0A` +
+      `⏰ *Horário:* ${encodeURIComponent(hora)}%0A` +
+      `📍 *Local:* ${encodeURIComponent(local)}%0A` +
+      `📝 *Observações:* ${encodeURIComponent(observacoes)}`;
+
+    window.open(`https://wa.me/5586998078582?text=${mensagem}`, '_blank');
+
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
